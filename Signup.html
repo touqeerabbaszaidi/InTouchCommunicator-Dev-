@@ -59,7 +59,7 @@
         }
         function GetAllSchools() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetAllSchoolSchoolNameAsc',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetAllSchoolSchoolNameAsc',
                 type: 'POST',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -162,7 +162,7 @@
                 else
                 {
                     $.ajax({
-                    url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUser_EmailAndSchoolCode',
+                    url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUser_EmailAndSchoolCode',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
                     data: "{'email': '" + $("#txtEmail").val() + "', 'code':'" + $("#ddlBusinesses").val() + "'}",
@@ -181,7 +181,7 @@
                             //alert(Id);
                            // alert(CompleteAddress);
                             $.ajax({
-                                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
+                                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
                                
                                 type: 'POST',
                                 data: "{'schoolUserId': '" + Id +"','firstName': '" + $("#txtFirstName").val() + "','lastName': '" + $("#txtLastName").val() + "','email': '" + $("#txtEmail").val() + "','password': '" + $("#txtPassword").val() + "','SchoolCode': '" + $("#ddlBusinesses").val() + "','isActive':'"+ false +"','Address':'" + CompleteAddress + "','Phone':'" + $("#txtPhone").val() + "'}",

@@ -194,7 +194,7 @@
             //alert("button clicked.");
             $.ajax({
                 type: "POST",
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/MobileAppGetSchoolUserByEmailAndPassword',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/MobileAppGetSchoolUserByEmailAndPassword',
                 //url: "http://projectxmobile.2bvision.com/webservice.asmx/MobileAppGetSchoolUserByEmailAndPassword",
                 //url: "Webservice.asmx/MobileAppGetSchoolUserByEmailAndPassword",
                 data: "{'email': '" + $('#txtEmail').val() + "','password':'" + $('#txtPassword').val() + "'}",
@@ -211,7 +211,7 @@
                             var AccountActive = prod.IsActive;
                             $.ajax({
                                 type: "POST",
-                                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchools_SchoolCodeWise',
+                                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchools_SchoolCodeWise',
                                 // url: "http://projectxmobile.2bvision.com/Webservice.asmx/GetSchools_SchoolCodeWise",
                                 //url: "Webservice.asmx/GetSchools_SchoolCodeWise",
                                 data: "{'strSchoolCode': '" + prod.SchoolCode + "'}",
@@ -278,7 +278,7 @@
             //  alert("yes");
             $.ajax({
                 type: "POST",
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/MobileAppGetSchoolByEmailPassword',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/MobileAppGetSchoolByEmailPassword',
                 //url: "http://projectxmobile.2bvision.com/webservice.asmx/MobileAppGetSchoolByEmailPassword",
                 //url: "Webservice.asmx/MobileAppGetSchoolByEmailPassword",
                 data: "{'email': '" + $('#txtEmail').val() + "','password':'" + $('#txtPassword').val() + "'}",
@@ -302,7 +302,7 @@
                             var username = "Admin";
                             $.ajax({
                                 type: "POST",
-                                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchools_SchoolCodeWise',
+                                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchools_SchoolCodeWise',
                                 //url: "http://projectxmobile.2bvision.com/Webservice.asmx/GetSchools_SchoolCodeWise",
                                 //url: "Webservice.asmx/GetSchools_SchoolCodeWise",
                                 data: "{'strSchoolCode': '" + prod.SchoolCode + "'}",
@@ -363,7 +363,7 @@
         function LoginBackOfficeUser() {
             $.ajax({
                 type: "POST",
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/MobileAppGetBackOfficeUser_ByEmailandPassword',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/MobileAppGetBackOfficeUser_ByEmailandPassword',
                 //url: "http://projectxmobile.2bvision.com/webservice.asmx/MobileAppGetBackOfficeUser_ByEmailandPassword",
                 //url: "Webservice.asmx/MobileAppGetBackOfficeUser_ByEmailandPassword",
                 data: "{'email': '" + $('#txtEmail').val() + "','password':'" + $('#txtPassword').val() + "'}",
@@ -381,7 +381,7 @@
                             //alert("School Code::::" + prod.SchoolId);
                             $.ajax({
                                 type: "POST",
-                                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
+                                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
                                 // url: "http://projectxmobile.2bvision.com/Webservice.asmx/GetSchool_SchoolIdWise",
                                 //url: "Webservice.asmx/GetSchool_SchoolIdWise",
                                 data: "{'SchoolId': '" + prod.SchoolId + "'}",
@@ -449,7 +449,7 @@
         function GetSchoolNameBySchoolCode(code) {
             $.ajax({
                 type: "POST",
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUserByEmailAndPassword',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUserByEmailAndPassword',
                 //url: "http://projectx.2bvision.com/WebCommunicator/Webservice.asmx/GetSchoolUserByEmailAndPassword",
                 //url: "Webservice.asmx/GetSchools_SchoolCodeWise",
                 data: "{'strSchoolCode': '" + code + "'}",

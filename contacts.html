@@ -109,7 +109,7 @@
             
             $.ajax({
 
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
                 //url: 'http://projectX.2bvision.com/projectx/WebCommunicator/WebService.asmx/GetSchool_SchoolIdWise',
                 //url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetSchool_SchoolIdWise',
                 //url: 'WebService.asmx/GetSchool_SchoolIdWise',
@@ -132,7 +132,7 @@
         function GetContacts() {
             $.ajax({
                 //url: 'WebService.asmx/GetContact_SchoolIdWise',
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetContact_SchoolIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetContact_SchoolIdWise',
                 //url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetContact_SchoolIdWise',
                 type: 'POST',
                 data: "{'SchoolId': '" + querystring + "'}",
@@ -248,9 +248,9 @@
         <li><a id="contacts" data-rel="external">Contacts</a></li>
         <li><a id="resources" data-rel="external">Resources</a></li>
         <li><a id="mydetail" data-rel="external">My Details</a></li>
-        <li><a id="share" data-rel="external">Share</a></li>
+        <!--<li><a id="share" data-rel="external">Share</a></li>-->
         <li><a id="personalize" data-rel="external">Personalize</a></li>
-        <li><a id="UserPledges" data-rel="external">Donation</a></li>
+        <!--<li><a id="UserPledges" data-rel="external">Donation</a></li>-->
         <li><a id="changeschool" data-rel="external">Change Organization</a></li>
         <li><a id="lnkLogout" data-rel="external">Logout</a></li>
     </ul>

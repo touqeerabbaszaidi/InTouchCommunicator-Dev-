@@ -68,7 +68,7 @@
         Paramdata = { "SchoolId": querystring }
         function GetSchoolInfo() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
                 // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetSchool_SchoolIdWise',
                 //url: 'WebService.asmx/GetSchool_SchoolIdWise',
                 type: 'POST',
@@ -92,7 +92,7 @@
             var schoolid = getUrlVars()["value"];
             var calendarid = getUrlVars()["calendarId"];
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetCalendar_CalendarIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetCalendar_CalendarIdWise',
                 //url: 'WebService.asmx/GetCalendar_CalendarIdWise',
                 // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetCalendar_CalendarIdWise',
                 type: 'POST',

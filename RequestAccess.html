@@ -70,7 +70,7 @@
         }
         function CheckBusinessAvailibility() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUser_EmailAndSchoolCode',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUser_EmailAndSchoolCode',
                 type: 'POST',
                 data: "{'email': '" + window.localStorage["username"] + "','code':'" + $("#ddlBusinesses").val() + "'}",
                 contentType: "application/json; charset=utf-8",
@@ -103,7 +103,7 @@
         function CheckAutoAccept() {
           
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetAutoAcceptBySchoolCode',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetAutoAcceptBySchoolCode',
                 type: 'POST',
                 data: "{'code': '" + $("#ddlBusinesses").val() + "'}",
                 contentType: "application/json; charset=utf-8",
@@ -127,7 +127,7 @@
         function GetUserDetail() {
            // alert($("#hfAutoAccept").val());
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUserByEmail',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUserByEmail',
                 type: 'POST',
                 data: "{'email': '" + window.localStorage["username"] + "'}",
                 contentType: "application/json; charset=utf-8",
@@ -138,7 +138,7 @@
                     if (Kewords.length > 0) {
                        // alert("yes");
                         $.ajax({
-                            url: 'http://mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
+                            url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
                             type: 'POST',
                             data: "{'schoolUserId': '" + 0 + "','firstName': '" + Kewords[0].FirstName + "','lastName': '" + Kewords[0].LastName + "','email': '" + Kewords[0].Email + "','password': '" + Kewords[0].Password + "','SchoolCode':'" + $("#ddlBusinesses").val() + "','isActive':'" + $("#hfAutoAccept").val() + "','Address':'" + Kewords[0].Address + "','Phone':'" + Kewords[0].Phone + "'}",
                             contentType: "application/json; charset=utf-8",
@@ -176,7 +176,7 @@
             var Auto = $("#hfAutoAccept").val();
            // alert(Auto);
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolByEmail',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchoolByEmail',
                 type: 'POST',
                 data: "{'email': '" + window.localStorage["username"] + "'}",
                 contentType: "application/json; charset=utf-8",
@@ -187,7 +187,7 @@
                     if (Kewords.length > 0) {
                        // alert("yes");
                         $.ajax({
-                            url: 'http://mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
+                            url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
                             type: 'POST',
                             data: "{'schoolUserId': '" + 0 + "','firstName': '" + Kewords[0].FirstName + "','lastName': '" + Kewords[0].LastName + "','email': '" + window.localStorage["username"] + "','password': '" + Kewords[0].SchoolPassword + "','SchoolCode':'" + $("#ddlBusinesses").val() + "','isActive':'" + Auto + "','Address':'" + Kewords[0].SchoolAddress + "','Phone':'" + Kewords[0].SchoolPhoneNumber + "'}",
                             contentType: "application/json; charset=utf-8",
@@ -223,7 +223,7 @@
         }
         function GetBackUserDetail() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetBcakOfficeUser_ByEmail',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetBcakOfficeUser_ByEmail',
                 type: 'POST',
                 data: "{'email': '" + window.localStorage["username"] + "'}",
                 contentType: "application/json; charset=utf-8",
@@ -234,7 +234,7 @@
                     if (Kewords.length > 0) {
                         // alert("yes");
                         $.ajax({
-                            url: 'http://mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
+                            url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
                             type: 'POST',
                             data: "{'schoolUserId': '" + 0 + "','firstName': '" + Kewords[0].UserFristName + "','lastName': '" + Kewords[0].UserLastName + "','email': '" + window.localStorage["username"] + "','password': '" + Kewords[0].UserPassword + "','SchoolCode':'" + $("#ddlBusinesses").val() + "','isActive':'" + false + "','Address':'" + Kewords[0].Address + "','Phone':'" + Kewords[0].UserPhoneNo + "'}",
                             contentType: "application/json; charset=utf-8",
@@ -270,7 +270,7 @@
         }
         function GetAllSchools() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetAllSchoolSchoolNameAsc',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetAllSchoolSchoolNameAsc',
                 type: 'POST',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -290,7 +290,7 @@
         }
         function GetAllBusinessTypes() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetAllBusinessTypes',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetAllBusinessTypes',
                 type: 'POST',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -310,7 +310,7 @@
         }
         function GetBusinessBusinessTypewise(BusinessTypeId) {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetBusinessesByBusinessTypeId',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetBusinessesByBusinessTypeId',
                 type: 'POST',
                 data: "{'BusinessTypeId': '" + BusinessTypeId + "'}",
                 contentType: "application/json; charset=utf-8",

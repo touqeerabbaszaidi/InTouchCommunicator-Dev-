@@ -38,7 +38,7 @@ function registerPushwooshIOS(email) {
         pushNotification.setApplicationIconBadgeNumber(+1);
     });
 
-    pushNotification.registerDevice({ alert: true, badge: true, sound: true, pw_appid: "3913D-FBE0C", appname: "ITC" },
+    pushNotification.registerDevice({ alert: true, badge: true, sound: true, pw_appid: "11479-94DE7", appname: "ITC Dev" },
 									function (status) {
 									    var deviceToken = status['deviceToken'];
 									    //alert('registerDevice: ' + deviceToken);
@@ -76,7 +76,7 @@ function InsertPushToken(email, deviceToken) {
     //alert("Email: " + email);
     //alert("Token: " + token);
     $.ajax({
-        url: 'http://mobile.intouchcommunicator.com/WebService.asmx/InsertPushTokenAndroid',
+        url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/InsertPushTokenAndroid',
         //url: 'WebService.asmx/InsertPushTokenAndroid',
         type: 'POST',
         data: "{'PushToken': '" + deviceToken + "','Email': '" + email + "'}",

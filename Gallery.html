@@ -144,7 +144,7 @@ $(document).ready(function(e) {
         Paramdata = { "SchoolId": querystring }
         function GetSchoolInfo() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
                 // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetSchool_SchoolIdWise',
                 //url: 'WebService.asmx/GetSchool_SchoolIdWise',
                 type: 'POST',
@@ -168,7 +168,7 @@ $(document).ready(function(e) {
         ParamdataGallery = { "intSchoolId": querystringGallery, "SchoolUserId": schooluserid }
         function GetGallery() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetGallery_SchoolIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetGallery_SchoolIdWise',
                 //url: 'WebService.asmx/GetGallery_SchoolIdWise',
                 //url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetGallery_SchoolIdWise',
                 type: 'POST',
@@ -194,7 +194,7 @@ $(document).ready(function(e) {
             var intSchoolId = getUrlVars()["value"];
             var schooluserid = getUrlVars()["userId"];
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetGallery_SchoolIdTypeWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetGallery_SchoolIdTypeWise',
                 //url: 'WebService.asmx/GetGallery_SchoolIdWise',
                 // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetGallery_SchoolIdTypeWise',
                 type: 'POST',
@@ -222,7 +222,7 @@ $(document).ready(function(e) {
             // alert(intSchoolId);
             // alert(schooluserid);
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/BindGaleryTypeBySchoolId',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/BindGaleryTypeBySchoolId',
                 //url: 'WebService.asmx/GetChannels_SchoolIdWise',
                 // url: 'http://projectxmobile.2bvision.com/WebService.asmx/BindGaleryTypeBySchoolId',
                 type: 'POST',
@@ -381,9 +381,9 @@ $(document).ready(function(e) {
         <li><a id="contacts" data-rel="external">Contacts</a></li>
         <li><a id="resources" data-rel="external">Resources</a></li>
         <li><a id="mydetail" data-rel="external">My Details</a></li>
-        <li><a id="share" data-rel="external">Share</a></li>
+        <!--<li><a id="share" data-rel="external">Share</a></li>-->
         <li><a id="personalize" data-rel="external">Personalize</a></li>
-        <li><a id="UserPledges" data-rel="external">Donation</a></li>
+        <!--<li><a id="UserPledges" data-rel="external">Donation</a></li>-->
         <li><a id="changeschool" data-rel="external">Change Organization</a></li>
         <li><a id="lnkLogout" data-rel="external">Logout</a></li>
     </ul>

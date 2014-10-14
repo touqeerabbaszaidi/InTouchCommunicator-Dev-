@@ -109,7 +109,7 @@
         Paramdata = { "SchoolId": querystring, "SchoolUserId": schooluserid }
         function GetSchoolInfo() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
                 // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetSchool_SchoolIdWise',
                 //url: 'WebService.asmx/GetSchool_SchoolIdWise',
                 type: 'POST',
@@ -200,7 +200,7 @@
      
         function GetResources() {
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetResourcesSchoolId_SchoolUserIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetResourcesSchoolId_SchoolUserIdWise',
                 //url: 'WebService.asmx/GetResources_SchoolIdWise',
                 //url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetResourcesSchoolId_SchoolUserIdWise',
                 type: 'POST',
@@ -232,7 +232,7 @@
             var schoolid = getUrlVars()["value"];
             var schooluserid = getUrlVars()["userId"];
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetResources_SchoolIDUserIdandChannelWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetResources_SchoolIDUserIdandChannelWise',
                 //url: 'WebService.asmx/GetResources_SchoolChannelWise',
                 // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetResources_SchoolIDUserIdandChannelWise',
                 type: 'POST',
@@ -263,7 +263,7 @@
             var schoolid = getUrlVars()["value"];
             var schooluserid = getUrlVars()["userId"];
             $.ajax({
-                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetUserActiveChannels_SchoolIdSchoolUserIdWise',
+                url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetUserActiveChannels_SchoolIdSchoolUserIdWise',
                 //url: 'WebService.asmx/GetUserActiveChannels_SchoolIdSchoolUserIdWise',
                 // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetUserActiveChannels_SchoolIdSchoolUserIdWise',
                 type: 'POST',
@@ -341,9 +341,9 @@
         <li><a id="contacts" data-rel="external">Contacts</a></li>
         <li><a id="resources" data-rel="external">Resources</a></li>
         <li><a id="mydetail" data-rel="external">My Details</a></li>
-        <li><a id="share" data-rel="external">Share</a></li>
+        <!--<li><a id="share" data-rel="external">Share</a></li>-->
         <li><a id="personalize" data-rel="external">Personalize</a></li>
-        <li><a id="UserPledges" data-rel="external">Donation</a></li>
+        <!--<li><a id="UserPledges" data-rel="external">Donation</a></li>-->
         <li><a id="changeschool" data-rel="external">Change Organization</a></li>
         <li><a id="lnkLogout" data-rel="external">Logout</a></li>
     </ul>
