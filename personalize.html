@@ -122,8 +122,14 @@
                         var ChanelID = Kewords[i].ChannelId;
                         var schooluserid = getUrlVars()["userId"];
                         //$("#UlChannels").append("<li><label><input type='checkbox' checked='true' name= '" + Kewords[i].ChannelName + "' value='" + Kewords[i].ChannelId + "' id='" + Kewords[i].ChannelId + "' class='cbChannels'>" + Kewords[i].ChannelName + "</label></li>");
-                        document.getElementById("UlChannels").innerHTML += "<li><label class='km-listview-label'><input type='checkbox' checked='true' name= '" + Kewords[i].ChannelName + "' value='" + Kewords[i].ChannelId + "' id='" + Kewords[i].ChannelId + "' class='km-widget km-icon km-check'>" + Kewords[i].ChannelName + "</label></li>";
-                        GerCheckBoxChecked(ChanelID);
+                        if (Kewords[i].ChannelType == true) {
+                            document.getElementById("UlChannels").innerHTML += "<li><label class='km-listview-label'><input type='checkbox' disabled='disabled' checked='true' name= '" + Kewords[i].ChannelName + "' value='" + Kewords[i].ChannelId + "' id='" + Kewords[i].ChannelId + "' class='km-widget km-icon km-check'>" + Kewords[i].ChannelName + "</label></li>";
+                        }
+                            //$("#UlChannels").append("<li><label><input type='checkbox' checked='true' name= '" + Kewords[i].ChannelName + "' value='" + Kewords[i].ChannelId + "' id='" + Kewords[i].ChannelId + "' class='cbChannels'>" + Kewords[i].ChannelName + "</label></li>");
+                        else {
+                            document.getElementById("UlChannels").innerHTML += "<li><label class='km-listview-label'><input type='checkbox' checked='true' name= '" + Kewords[i].ChannelName + "' value='" + Kewords[i].ChannelId + "' id='" + Kewords[i].ChannelId + "' class='km-widget km-icon km-check'>" + Kewords[i].ChannelName + "</label></li>";
+                            GerCheckBoxChecked(ChanelID);
+                        }
                         //document.getElementById("dlNews").innerHTML += "<dt>" + Kewords[i].NewsHeading + "</dt><dd>" + Kewords[i].NewsDescription + "</dd>";
 
                     }
