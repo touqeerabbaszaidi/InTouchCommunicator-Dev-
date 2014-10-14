@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+<title>InTouchApp</title>
+
+<script src="JS/jquery.min.js"></script>
+<script src="JS/kendo.all.min.js"></script>
+<link href="Css/kendo.mobile.all.min.css" rel="stylesheet" />
+<link href="Css/kendo.all.min.js" rel="stylesheet" />
+<link href="Css/InTouchCustom.css" rel="stylesheet" />
+<script type="text/javascript" charset="utf-8" src="cordova.ios.js"></script>
+<script src="JS/date.format.js" type="text/javascript"></script>
+<script src="JS/jquery-1.8.3.js" type="text/javascript"></script>
+<style>
+[href*=index], #back-button
+{
+  visibility: hidden;
+}
+</style>
+    <script type="text/javascript">
+
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        var querystring = getUrlVars()["value"];
+        Paramdata = { "SchoolId": querystring }
+        function GetSchoolInfo() {
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
+                // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetSchool_SchoolIdWise',
+                //url: 'WebService.asmx/GetSchool_SchoolIdWise',
+                type: 'POST',
+                data: JSON.stringify(Paramdata),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    //document.getElementById("imgSchoolLogo").src = "http://projectX.2bvision.com/projectx/superadmin/SchoolLogo/" + Kewords.SchoolLogo;
+                    // document.getElementById("drawer-home").innerHTML = "<b>" + Kewords.SchoolName + "</b>";
+                    $('#BusinessTitle').append("" + Kewords.SchoolName + "");
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div
+                }
+            });
+        }
+
+        function GetNews() {
+            var schoolid = getUrlVars()["value"];
+            //alert(schoolid);
+            var newsid = getUrlVars()["newsId"];
+            //alert(schooluserid);
+            $.ajax({
+                //url: 'WebService.asmx/GetNews_NewsIdWise',
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetNews_NewsIdWise',
+                //url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetNews_NewsIdWise',
+                type: 'POST',
+                data: "{'intNewsId': '" + newsid + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    //alert("success News");
+                    var Kewords = {};
+                    Kewords = response.d;
+                    for (i = 0; i < Kewords.length; i++) {
+                        document.getElementById("UlNews").innerHTML += "<li><h3>" + Kewords[i].NewsHeading + "</h2><p style='clear:both;'>" + Kewords[i].NewsDescription + "</p></li>";
+                    }
+
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            //alert("Assigning Links");
+          
+            //alert("Get Functions");
+            $("#UlNews a").live('click', function () {
+
+                var prods = $(this).attr('href');
+                // alert(prods);
+                window.open(prods, '_system');
+
+                return false;
+            });
+            GetFunctions();
+            $('#btnBack').click(function () {
+                //alert("yes");
+                var schoolid = getUrlVars()["value"];
+                //alert(schoolid);
+                var schooluserid = getUrlVars()["userId"];
+                var username = getUrlVars()["username"];
+                // alert(username);
+                window.location = "Homepage.html?value=" + schoolid + "&userId=" + schooluserid + "&username=" + username + "";
+            });
+        });
+
+        function GetUsername() {
+            var usernamewithoutspace = getUrlVars()["username"];
+            var username = usernamewithoutspace.replace("%20", " ");
+            // $("#LoginUser").append("" + username + "");
+            $("#my-drawer h2").text("" + username + "");
+        }
+
+        function GetFunctions() {
+            GetSchoolInfo();
+         //  alert("Get News");
+            GetNews();
+            //alert("Get Channels");
+            //GetChannels();
+           /// GetUsername();
+            //alert("Perfect");
+        }
+
+    </script>
+
+
+    
+</head>
+
+<body>
+
+    <div data-role="view" id="drawer-home" data-layout="drawer-layout" data-title="">
+
+        <h1 id="TitleDisplay">News</h1>
+        <br />
+        <ul data-role="listview" id="UlNews" style="margin-top:-20px">
+            <!--<li>
+            <a>
+                <h2>News Title here displayed</h2>
+                <p>28-5-2014, Wednesday</p>
+            </a>
+            </li>
+            <li>
+            <a>
+                <h2>News Title here displayed</h2>
+                <p>28-5-2014, Wednesday</p>
+            </a>
+            </li>-->
+        </ul>
+
+
+ 
+    </div>
+
+
+    
+
+    <div data-role="layout" data-id="drawer-layout">
+        <header data-role="header">
+            <div data-role="navbar">
+                <!--<a data-role="button" data-rel="drawer" href="#my-drawer" data-align="left">
+                    <img src="Images/SwipeMenuICO.png" id="MenuICOBtn" />
+                </a>-->
+                <input type="image" src="Images/br_prev.png" id="btnBack" width="40" height="40" data-align="left" style="margin-top:-21px;" />
+                <span data-role="view-title" id="BusinessTitle"></span>
+                <!-- <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a> -->
+            </div>
+        </header>
+    </div>
+
+
+
+
+    <script>
+        var app = new kendo.mobile.Application($(document.body), { platform: 'android' });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.input-text
+{
+	font-size:20px; font-family:Arial; margin:15px 0 0 0px; color:#FFF;
+}
+.input-area
+{
+   	margin:5px 0 0 0px; width:96%; height:40px;border-radius:5px;
+}
+
+.submit-btn
+{
+   	/*margin:4% auto 0px 1%; float:left; width:96%; height:40px;
+	background:#1b9dba;
+	border:1px solid #1C6C7A;
+	box-shadow:0 1px 6px 4px rgba(0, 0, 0, 0.07) inset, 0 0 0 3px #FEFEFE, 0 5px 3px 3px #D2D2D2;
+	border-radius:3px;*/
+    background:url('../Images/signButton.png') no-repeat;
+    float:right;
+    margin:10px 10px 0px 0px;
+    width:110px;
+    height:40px;
+}
+.submit-btn:hover 
+{
+	/*margin:4% auto 0px 1%; float:left;  width:96%; height:40px;
+	background:#17bfe5;
+	border:1px solid #1C6C7A;
+	box-shadow:0 1px 6px 4px rgba(0, 0, 0, 0.07) inset, 0 0 0 3px #FEFEFE, 0 5px 3px 3px #D2D2D2;
+	border-radius:3px;*/
+}
+
+
+.schoolsList {text-align: center;margin: 60px auto 0 auto;font-size: 15px;width: 95%;padding: 5px;}
+
+#dvLoading
+{
+   background:Gray url(../Images/loader.gif) no-repeat center center;
+   height: 100px;
+   width: 100px;
+   position: fixed;
+   z-index: 1000;
+   left: 40%;
+   top: 40%;
+   margin: -25px 0 0 -25px;
+   filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+.view-btn{
+ padding:15px 50px;
+ font:16px Arial, Helvetica, sans-serif;
+ text-align:center;
+ color:#FFF;
+ background:#17a1e9;
+ margin:10px 15px 0px 0px;
+ -moz-border-radius:5px;
+ -webkit-border-radius:5px;
+ border-radius:5px;
+ moz-transition: all 0.4s ease-in-out;
+ -o-transition: all 0.4s ease-in-out;
+ -ms-transition: all 0.4s ease-in-out;
+ transition: all 0.4s ease-in-out;
+}
+.view-btn:hover{
+ cursor:pointer;
+ background:#0d8fd2;
+ moz-transition: all 0.4s ease-in-out;
+ -o-transition: all 0.4s ease-in-out;
+ -ms-transition: all 0.4s ease-in-out;
+ transition: all 0.4s ease-in-out;
+}

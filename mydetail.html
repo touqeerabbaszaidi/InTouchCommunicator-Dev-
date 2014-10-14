@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+<title>InTouchApp</title>
+
+<script src="JS/jquery.min.js"></script>
+<script src="JS/kendo.all.min.js"></script>
+<link href="Css/kendo.mobile.all.min.css" rel="stylesheet" />
+<link href="Css/kendo.all.min.js" rel="stylesheet" />
+<link href="Css/InTouchCustom.css" rel="stylesheet" />
+<script src="JS/jquery-1.8.3.js" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.ios.js"></script>
+    <script type="text/javascript" src="PushNotification.js"></script>
+<style>
+[href*=index], #back-button
+{
+  visibility: hidden;
+}
+</style>
+    <script type="text/javascript">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            checkConnection();
+            document.addEventListener("resume", onResume, false);
+        }
+        function InitPushRecived() {
+            //  alert("yes");
+            var schoolId = getUrlVars()["value"];
+            var schooluserid = getUrlVars()["userId"];
+            var username = getUrlVars()["username"];
+            var pushNotification = window.plugins.pushNotification;
+            pushNotification.onDeviceReady();
+            document.addEventListener('push-notification', function (event) {
+                var title = event.notification;
+                var splitted = title.aps.alert.split("~");
+                //alert("Title: " + title);
+
+                //  alert(splitted[2]);
+                if (splitted[2] == schoolId) {
+                    window.location.href = "Homepage.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "";
+                }
+                else {
+                    window.location.href = "changeschool.html?type=" + splitted[0] + "&schoolId=" + splitted[2] + "";
+                }
+                pushNotification.stopGeoPushes();
+            });
+        }
+        function onResume() {
+
+            InitPushRecived();
+        }
+
+        var getconstatus;
+
+        function checkConnection() {
+            var networkState = navigator.network.connection.type;
+
+            var states = {};
+            states[Connection.UNKNOWN] = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI] = 'WiFi connection';
+            states[Connection.CELL_2G] = 'Cell 2G connection';
+            states[Connection.CELL_3G] = 'Cell 3G connection';
+            states[Connection.CELL_4G] = 'Cell 4G connection';
+            states[Connection.NONE] = 'No network connection';
+
+            getconstatus = states[networkState];
+
+            //alert('Connection type: ' + states[networkState]);
+        }
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        function assignLinks() {
+            var schoolId = getUrlVars()["value"];
+            var schooluserid = getUrlVars()["userId"];
+            if (schooluserid == "undefined") {
+                schooluserid = "0";
+            }
+            var username = getUrlVars()["username"];
+            $("#lnkAtAGlance").attr("href", "Homepage.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkNews").attr("href", "news.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkCalender").attr("href", "calendar.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkContacts").attr("href", "contacts.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkGallery").attr("href", "Gallery.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkMyDetail").attr("href", "mydetail.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkPersonalize").attr("href", "personalize.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkResources").attr("href", "resources.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkShare").attr("href", "share.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkChangeSchool").attr("href", "changeschool.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkUserPledges").attr("href", "UserPledges.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+
+            //$("#lnkLogout").attr("href", "index.html");
+        }
+        function GetUsername() {
+            var usernamewithoutspace = getUrlVars()["username"];
+            var username = usernamewithoutspace.replace("%20", " ");
+            // $("#LoginUser").append("" + username + "");
+            $("#my-drawer h2").text("" + username + "");
+        }
+        
+
+        var querystring = getUrlVars()["value"];
+        Paramdata = { "SchoolId": querystring }
+        function GetSchoolInfo() {
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchool_SchoolIdWise',
+                // url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetSchool_SchoolIdWise',
+                //url: 'WebService.asmx/GetSchool_SchoolIdWise',
+                type: 'POST',
+                data: JSON.stringify(Paramdata),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    //document.getElementById("imgSchoolLogo").src = "http://projectX.2bvision.com/projectx/superadmin/SchoolLogo/" + Kewords.SchoolLogo;
+                    // document.getElementById("drawer-home").innerHTML = "<b>" + Kewords.SchoolName + "</b>";
+                    $('#BusinessTitle').append("" + Kewords.SchoolName + "");
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div
+                }
+            });
+        }
+
+
+        function GetMyDetails() {
+            var schooluserid = getUrlVars()["userId"];
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUserBySchoolUserId',
+                //url: 'http://projectxmobile.2bvision.com/WebService.asmx/GetSchoolUserBySchoolUserId',
+                //url: 'WebService.asmx/GetSchoolUserBySchoolUserId',
+                type: 'POST',
+                data: "{'SchoolUserId': '" + schooluserid + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    for (i = 0; i < Kewords.length; i++) {
+                        var FirstName = Kewords[i].FirstName;
+                        $("#txtFirstName").val(Kewords[i].FirstName);
+                        $("#txtLastName").val(Kewords[i].LastName);
+                        $("#txtEmailAddress").val(Kewords[i].Email);
+                        //alert("Phone:"+Kewords[i].Phone);
+                        $("#txtPhone").val(Kewords[i].Phone);
+                        //alert("Address:"+Kewords[i].Address);
+                        var CompleteAddress = Kewords[i].Address;
+                        var address = CompleteAddress.split("~");
+
+                        $("#txtAddress").val(address[0]);
+                        $("#txtCity").val(address[1]);
+                        $("#ddlStates").val(address[2]);
+                        $("#txtZipCode").val(address[3]);
+                    }
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div
+                }
+            });
+        }
+
+        function UpdateMyDetails() {
+            checkConnection();
+            if (getconstatus == "No network connection") {
+                function alertDismissed() {
+
+                }
+                navigator.notification.alert(
+                            'No network connection! First connect with your internet.',  // message
+                                alertDismissed,         // callback
+                                 'Connection error ',            // title
+                                    'Ok'                  // buttonName
+                                          );
+
+            }
+            else {
+                if ($("#txtPhone").val() == "" || $("#txtPhone").val().length < 10) {
+                    // alert("Please Enter a Valid Phone Number");
+                    function alertDismissed() {
+
+                    }
+                    navigator.notification.alert(
+                             'Please Enter a Valid Phone Number',  // message
+                                 alertDismissed,         // callback
+                                  ' Phone Required',            // title
+                                     'Ok'                  // buttonName
+                                           );
+                    $('#txtPhone').focus();
+                    return;
+                }
+                var schooluserid = getUrlVars()["userId"];
+                var CompleteAddress = $("#txtAddress").val() + "~" + $("#txtCity").val() + "~" + $("#ddlStates").val() + "~" + $("#txtZipCode").val();
+                // alert(CompleteAddress);
+                $.ajax({
+                    url: 'http://mobile.intouchcommunicator.com/WebService.asmx/UpdateSchoolUserBySchoolUserId',
+                    //url: 'http://projectxmobile.2bvision.com/WebService.asmx/UpdateSchoolUserBySchoolUserId',
+                    //url: 'WebService.asmx/UpdateSchoolUserBySchoolUserId',
+                    type: 'POST',
+                    data: "{'SchoolUserId': '" + schooluserid + "','FirstName': '" + $("#txtFirstName").val().trim() + "','LastName': '" + $("#txtLastName").val().trim() + "','Email': '" + $("#txtEmailAddress").val() + "','Phone': '" + $("#txtPhone").val() + "','Address': '" + CompleteAddress + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        function alertDismissed() {
+
+                        }
+                        navigator.notification.alert(
+                                 'Details Updated Successfully!',  // message
+                                     alertDismissed,         // callback
+                                      ' ',            // title
+                                         'Ok'                  // buttonName
+                                               );
+                        AssignUsername();
+                    },
+                    failure: function (errMsg) {
+                        alert("Something Went Wrong!");
+                        //$('#errorMessage').text(errMsg); //errorMessage is id of the div
+                    }
+                });
+            }
+        }
+        function AssignUsername() {
+            var schoolId = getUrlVars()["value"];
+            var schooluserid = getUrlVars()["userId"];
+            if (schooluserid == "undefined") {
+                schooluserid = "0";
+            }
+            var username = $("#txtFirstName").val().trim() + " " + $("#txtLastName").val().trim();
+            $("#lnkAtAGlance").attr("href", "Homepage.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkNews").attr("href", "news.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkCalender").attr("href", "calendar.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkContacts").attr("href", "contacts.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkGallery").attr("href", "Gallery.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkMyDetail").attr("href", "mydetail.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkPersonalize").attr("href", "personalize.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkResources").attr("href", "resources.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkShare").attr("href", "share.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkChangeSchool").attr("href", "changeschool.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#lnkUserPledges").attr("href", "UserPledges.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "");
+            $("#my-drawer h2").text("" + username + "");
+        }
+        $(document).ready(function () {
+            $("#lnkLogout").live("click", function () {
+               // alert("yes");
+                localStorage.clear();
+                window.location = "index.html";
+
+            });
+          //  assignLinks();
+            GetUsername();
+            GetSchoolInfo();
+            GetMyDetails();
+            $(".MenuLinks li a").click(function () {
+                checkConnection();
+                if (getconstatus == "No network connection") {
+                    function alertDismissed() {
+
+                    }
+                    navigator.notification.alert(
+                             'No network connection! First connect with your internet.',  // message
+                                 alertDismissed,         // callback
+                                  'Connection error ',            // title
+                                     'Ok'                  // buttonName
+                                           );
+
+                }
+                else {
+                    var Id = $(this).attr('id');
+                    var schoolId = getUrlVars()["value"];
+                    var schooluserid = getUrlVars()["userId"];
+                    var username = getUrlVars()["username"];
+                    //  alert(Id);
+
+                    window.location = "" + Id + ".html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "";
+                }
+
+            });
+        });
+    </script>
+
+    
+       
+</head>
+
+<body onload="InitPushRecived();">
+
+    <div data-role="view" id="drawer-home" data-layout="drawer-layout" data-title="">
+    
+    <h1 id="TitleDisplay">My Details</h1>
+    
+    <div class="DetailForm">
+
+        <table class="Container" border="0">
+            <tr>
+                <td><label>First Name</label></td>
+                <td><input type="text" id="txtFirstName" /></td>
+            </tr>
+            <tr>
+                <td><label>Last Name</label></td>
+                <td><input type="text" id="txtLastName" /></td>
+            </tr>
+            <tr>
+                <td><label>Email Address</label></td>
+                <td><input type="text" id="txtEmailAddress" disabled="disabled" /></td>
+            </tr>
+            <tr>
+                <td><label>Phone</label></td>
+                <td><input type="tel" id="txtPhone" /></td>
+            </tr>
+            <tr>
+                <td><label>Address</label></td>
+                <td><input type="text" id="txtAddress" /></td>
+            </tr>
+            <tr>
+                <td><label>City</label></td>
+                <td><input type="text" id="txtCity" /></td>
+            </tr>
+            <tr>
+                <td><label>State</label></td>
+                <td>
+                    <div id="DropdownListCustome">
+                        <select name="State" id="ddlStates">
+                            <option value="" selected="selected">Select a State</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><label>ZipCode</label></td>
+                <td><input type="text" id="txtZipCode" /></td>
+            </tr>
+            <tr>
+
+                <td colspan="2"><input type="button" value="Submit" onclick="UpdateMyDetails();" /></td>
+            </tr>
+        </table>
+    
+
+   
+    </div>    
+    
+</div>
+
+
+<div data-role="drawer" id="my-drawer" style="width: 250px;">
+
+	<h2 id="LoginUser"></h2>
+    
+    <ul data-role="listview" class="MenuLinks">
+        <li><a id="Homepage" data-rel="external">Home</a></li>
+        <li><a id="news" data-rel="external">News</a></li>
+        <li><a id="calendar" data-rel="external">Calender</a></li>
+        <li><a id="Gallery" data-rel="external">Gallery</a></li>
+        <li><a id="contacts" data-rel="external">Contacts</a></li>
+        <li><a id="resources" data-rel="external">Resources</a></li>
+        <li><a id="mydetail" data-rel="external">My Details</a></li>
+        <li><a id="share" data-rel="external">Share</a></li>
+        <li><a id="personalize" data-rel="external">Personalize</a></li>
+        <li><a id="UserPledges" data-rel="external">Donation</a></li>
+        <li><a id="changeschool" data-rel="external">Change Organization</a></li>
+        <li><a id="lnkLogout" data-rel="external">Logout</a></li>
+    </ul>
+   
+</div>
+
+<div data-role="layout" data-id="drawer-layout">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-role="button" data-rel="drawer" href="#my-drawer" data-align="left">
+            	<img src="Images/SwipeMenuICO.png" id="MenuICOBtn" />
+            </a>
+            <span data-role="view-title" id="BusinessTitle"></span>
+            <!-- <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a> -->
+        </div>
+    </header>
+</div>
+
+
+
+
+    <script>
+        var app = new kendo.mobile.Application($(document.body), { platform: 'android' });
+    </script>
+</body>
+</html>

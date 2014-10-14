@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "JVW4WXCT22.com.intouchcommuicator.itc"
+        version   = "1.1.2">
+   <preference name="phonegap-version" value="2.9.0" />
+
+    <name>ITC</name>
+
+    <description>
+        Hello World sample application that responds to the deviceready events.
+    </description>
+
+    <author href="http://phonegap.com" email="rizwan.2bv@gmail.com">
+        Rizwan
+    </author>
+  
+   <icon src="images/icon.png" />
+  <!--icons -->
+  <!-- iphone -->
+  <icon src="icons/ios/icon-57.png" gap:platform="ios" width="57" height="57" />
+  <icon src="icons/ios/icon-72.png" gap:platform="ios" width="72" height="72" />
+  <icon src="icons/ios/icon_at_2x.png" gap:platform="ios" width="114" height="114" />
+  <icon src="icons/ios/icon-72@2x.png" gap:platform="ios" width="144" height="144" />
+
+  <!--icons end -->
+
+
+  <!--Splash screens -->
+  <!-- iphone -->
+  <gap:config-file platform="ios" parent="CFBundleShortVersionString">
+<string>114</string>
+</gap:config-file>
+ <gap:splash src="splash/ios/Default.png" gap:platform="ios" width="320" height="480" />
+<gap:splash src="splash/ios/Default_at_2x.png" gap:platform="ios" width="640" height="960" />
+<gap:splash src="splash/ios/Default_iphone5.png" gap:platform="ios" width="640" height="1136" />
+<gap:splash src="splash/ios/Default-Landscape.png" gap:platform="ios" width="1024" height="748" />
+<gap:splash src="splash/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1004" />
+
+<!-- retina iPad support: PhoneGap 2.5.0+ only -->
+<gap:splash src="splash/ios/Default-Landscape_at_2x.png" gap:platform="ios" width="2048" height="1496" />
+<gap:splash src="splash/ios/Default-Portrait_at_2x.png" gap:platform="ios" width="1536" height="2008" />
+
+  <preference name="DisallowOverscroll" value="true" />
+
+  <preference name="Notification" value="CDVNotification" />
+    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" />
+   <!--<plugin name="InAppBrowser" value="CDVInAppBrowser" />-->
+
+  <access origin="*"/>
+
+</widget>

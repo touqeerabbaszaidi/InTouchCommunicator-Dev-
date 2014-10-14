@@ -1,0 +1,465 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{background:#FFF;}
+
+.km-android .km-view .km-content {
+    background-color: #fff;
+    color: rgb(51, 51, 51);
+}
+
+
+.km-root .km-android .km-view {
+ -webkit-box-direction: normal;
+ -webkit-flex-direction: column;
+}
+ 
+.km-android .km-view {
+  -moz-box-direction: normal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column-normal;
+  -ms-flex-direction: column-normal;
+  flex-direction: column-normal;
+}
+.km-android .km-view-title{visibility: visible; float:right; margin-right:5px; font-size:18px; font-weight:500; margin-top:-2px;}
+ 
+.km-android .km-view .km-navbar {
+    background-color: rgb(26, 91, 152);
+	padding:5px;
+	padding-top: 20px;
+}
+
+.km-android input:checked{color:rgb(26, 91, 152);}
+
+.km-android .km-header .km-widget{color:#fff;}
+.km-android .km-widget{color:#333;}
+#MenuICOBtn{margin-top:5px; position:relative; left:-12px;}
+
+.km-android #my-drawer .km-content
+{
+	background:#333;
+	-webkit-box-shadow: inset -7px 8px 24px -3px rgba(0,0,0,0.75);
+	-moz-box-shadow: inset -7px 8px 24px -3px rgba(0,0,0,0.75);
+	box-shadow: inset -7px 8px 24px -3px rgba(0,0,0,0.75);
+}
+
+/*
+
+.km-android .km-view .km-content .km-listgroupinset .km-group-title .km-text {
+    color: rgb(51, 51, 51);
+}
+.km-android .km-view .km-tabstrip .km-button {
+    background-color: rgb(204, 204, 204);
+}
+.km-android .km-view .km-navbar {
+    background-color: rgb(204, 204, 204);
+}
+.km-android .km-view .km-navbar .km-button .km-text {
+    color: rgb(51, 51, 51);
+}
+.km-android .km-listview .km-list {
+    border-top-color: rgb(153, 153, 153);
+}
+.km-android .km-view .km-content .km-list > li {
+    border-color: rgb(153, 153, 153);
+}
+.km-android .km-view .km-content .km-listgroup .km-group-title .km-text {
+    color: #333;
+}
+.km-android .km-view .km-content .km-list > li .km-switch .km-switch-container {
+    background-color: #b2b2b2;
+}
+
+
+*/
+
+#TitleDisplay
+{margin:0px; padding:10px 0px 10px 10px; display:block; font-weight:500; border-bottom:1px solid #f2f2f2; background: #f2f2f2; font-size:20px;}
+
+.km-android .km-listview-wrapper{padding:0px;}
+.km-android .NewsDislay, .km-android .NewsDislay li{margin:0px; padding:0px;}
+.km-android .NewsDislay li h2{font-weight:500; font-size:20px; margin-bottom:0px;}
+.km-android .NewsDislay li p{font-weight:500; font-size:14px; margin-top:-8px;}
+.km-android .km-list li{border-bottom:1px solid #f2f2f2;}
+
+.km-android #LoginUser{color:#FFF; font-weight:500; font-size:24px;}
+
+.km-android .MenuLinks{margin-top:5px;}
+.km-android .MenuLinks li{border-bottom-color:#212121;}
+.km-android .MenuLinks li a {color:#FFF;}
+
+.km-android .km-navbar [class*=item] .km-button{background:none; opacity:1;}
+
+.km-android .km-widget .km-state-active{background:rgb(26, 91, 152);}
+
+.km-android .km-touch-scrollbar {
+  background-color: #666;
+}
+
+
+
+/**********************Gallery************************/
+
+.GalleryContainer
+{
+	margin:0px 0px 0px 0px;
+	padding:0px;
+	width:100%;
+	height:auto;	
+}
+
+
+.GalleryContainer #ImageContainer
+{
+	margin:3px 0px 0px 0px;
+	padding:0px;
+	width:49.5%;
+	height:150px;
+	overflow:hidden;	
+}
+
+.GalleryContainer #ImageContainer img
+{
+	min-width:100%;
+	max-width:120%;
+	min-height:150px;
+}
+
+.GalleryContainer #ImageContainer:nth-child(odd){float:left;}
+.GalleryContainer #ImageContainer:nth-child(even){float:right;}
+
+
+/**********************Gallery popup************************/
+
+#ImagePopUp
+{
+	margin:0px;
+	padding:0px;
+	width:100%;
+	background:#333;
+	position:fixed;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	z-index:1000;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	display:none;	
+}
+
+#ImagePopUp #Close
+{
+	margin:0px;
+	padding:8px 15px 8px 15px;
+	position:absolute;
+	right:10px;
+	border:none;
+	border-radius:5px;
+	overflow:hidden;
+	background:#FFF;
+	font-size:14px;
+	top:10px;	
+}
+
+
+#ImagePopUp h1
+{
+	margin:60px 10px 10px 10px;
+	font-weight:500;
+	display:block;
+	color:#FFF;
+	text-align:left;
+	font-size:18px;
+}
+
+#ImagePopUp img
+{
+	margin:10px 0px 0px 0px;
+	width:100%;
+}
+
+
+/**********************DisplayResources************************/
+
+#DisplayResources
+{
+	margin:10px auto;
+	width:98%;	
+}
+
+#DisplayResources
+{border-bottom:1px solid #f2f2f2; padding-bottom:10px;}
+
+#DisplayResources tr td:nth-child(1){width:72px;}
+
+#DisplayResources tr td:nth-child(2) h1
+{font-weight:500; font-size:18px; margin-bottom:0px;}
+
+#DisplayResources tr td:nth-child(2) p
+{font-weight:500; font-size:14px; margin-top:3px;}
+
+#DisplayResources tr td:nth-child(3){width:72px;}
+#DisplayResources tr td:nth-child(3) button,
+#DisplayResources tr td:nth-child(3) input[type=button],
+#DisplayResources tr td:nth-child(3) input[type=submit]
+{
+	background:rgb(26, 91, 152);
+	padding:8px;
+	border:none;
+	width:100%;
+	color:#fff;
+}
+
+
+#DropdownListCustome
+{
+	margin:10px 0px 10px 0px;
+	padding:0px 0px 10px 0px;
+	display:block;
+	color:#333;
+}
+
+
+#DropdownListCustome select
+{
+	color:#666;
+	font-size:18px;
+	padding:10px;
+	width:100%;
+	border-bottom-color: #CCC;
+	font-weight:500;
+}
+
+#DropdownListCustome select option
+{
+	background:#fff;
+	color:#666;
+	font-weight:500;
+}
+
+#UlOrganization li:hover{
+        background:rgb(26, 91, 152);
+}
+
+#UlOrganization li a{
+font-size:20px;
+}
+
+/**********************My Dtails Page************************/
+
+
+.DetailForm
+{
+	margin: 10px auto;
+	padding:0px;
+	width:90%;
+}
+
+.DetailForm .Container:first-child
+{margin-top:30px;}
+
+.DetailForm .Container
+{
+	margin-top:15px;
+	padding:0px;
+	width:100%;	
+}
+
+
+.DetailForm .Container tr td:nth-child(1){width:100px;}
+.DetailForm .Container tr td{padding-top:10px;}
+
+.DetailForm .Container label
+{
+	margin:0px 5px 3px 0px;
+	display:block;
+	clear:both;
+	font-weight:500;
+	font-size:16px;
+}
+
+.DetailForm .Container input[type=text], .DetailForm .Container input[type=tel]
+{
+	width:100%;
+	color:#333;
+	background:#FFF;
+	border:none;
+	border-width:0px;
+	border-style:none;
+	border-color:transparent;
+	webkit-touch-callout: none;
+	-webkit-tap-highlight-color: #FFF;
+	border-bottom:1px solid #333;
+	border-radius:5px;
+	overflow:hidden;
+	outline:none;
+	outline-offset:0px;
+	font-size:18px;
+	font-weight:500;
+}
+
+
+.DetailForm .Container input[type=button]
+{
+	padding:10px;
+	width:100%;
+	color:#fff;
+	background:rgb(26, 91, 152);
+	border:none;
+	border-radius:5px;
+	overflow:hidden;
+	outline:none;
+	font-size:18px;
+	font-weight:500;
+}
+
+
+
+
+/**********************Donation Page************************/
+
+
+.DonationForm
+{
+	margin: 10px auto;
+	padding:0px;
+	width:100%;
+}
+
+
+.DonationForm .Container
+{
+	margin-top:5px;
+	padding:0px;
+	width:100%;	
+}
+
+
+.DonationForm .Container tr td:nth-child(1){width:80px;}
+.DonationForm .Container tr td:nth-child(2){padding-right:10px;}
+.DonationForm .Container tr td{padding-top:10px;}
+
+.DonationForm .Container label
+{
+	margin:0px 5px 3px 10px;
+	display:block;
+	clear:both;
+	font-weight:500;
+	font-size:16px;
+}
+
+.DonationForm .Container input[type=text], .DetailForm .Container input[type=tel]
+{
+	width:100%;
+	color:#333;
+	background:#FFF;
+	border:none;
+	border-width:0px;
+	border-style:none;
+	border-color:transparent;
+	webkit-touch-callout: none;
+	-webkit-tap-highlight-color: #FFF;
+	border-bottom:1px solid #333;
+	border-radius:5px;
+	overflow:hidden;
+	outline:none;
+	outline-offset:0px;
+	font-size:18px;
+	font-weight:500;
+}
+
+
+.DonationForm .Container input[type=button]
+{
+	padding:10px;
+	width:98%;
+	color:#fff;
+	background:rgb(26, 91, 152);
+	border:none;
+	border-radius:5px;
+	overflow:hidden;
+	outline:none;
+	font-size:18px;
+	font-weight:500;
+}
+
+
+/*--------------------------LOGIN----------------------------------------*/
+
+.LoginContainer
+{
+	margin: 10px auto 0px auto;
+	padding:0px;
+	width:90%;
+}
+
+.LoginContainer .logo
+{
+	margin: 30px auto 0px auto;
+	padding:0px;
+	width:50%;
+}
+
+.LoginContainer .logo img
+{
+	width:100%;
+}
+
+.LoginContainer .Container
+{
+	margin-top:30px;
+	padding:0px;
+	width:100%;	
+}
+
+
+
+.LoginContainer .Container input[type=text],
+.LoginContainer .Container input[type=password]
+{
+	margin-top:5px;
+	width:100%;
+	color:#333;
+	background:#FFF;
+	border:none;
+	border-width:0px;
+	border-style:none;
+	border-color:transparent;
+	webkit-touch-callout: none;
+	-webkit-tap-highlight-color: #FFF;
+	border:1px solid #999 !important;
+	border-radius:5px;
+	overflow:hidden;
+	outline:none;
+	outline-offset:0px;
+	font-size:20px;
+	font-weight:500;
+}
+
+
+.LoginContainer .Container input[type=button]
+{
+	margin-top:10px;
+	padding:10px;
+	width:100%;
+	color:#fff;
+	background:rgb(26, 91, 152);
+	border:none;
+	border-radius:5px;
+	overflow:hidden;
+	outline:none;
+	font-size:18px;
+	font-weight:500;
+}
+.RequestAccess
+{
+ padding: 10px 0px 10px 0px;
+display: block;
+font-weight: 500;
+border-bottom: 1px solid #f2f2f2;
+background: #f2f2f2;
+font-size: 20px;
+ margin:0 auto;
+ width:100%;
+ text-align:center;
+ bottom:20px; 

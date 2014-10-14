@@ -1,0 +1,432 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>InTouchApp</title>
+    <script src="JS/jquery.min.js"></script>
+    <script src="JS/kendo.all.min.js"></script>
+    <link href="Css/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="Css/kendo.all.min.js" rel="stylesheet" />
+    <link href="Css/InTouchCustom.css" rel="stylesheet" />
+    <link href="Styles/style.css" rel="stylesheet" />
+    <!--<script type="text/javascript" src="js/jquery-1.4.2.js"></script>-->
+    <script type="text/javascript" src="cordova.ios.js"></script>
+    <script type="text/javascript" src="PushNotification.js"></script>
+    <style>
+        [href*=index], #back-button {
+            visibility: hidden;
+        }
+    </style>
+    <script type="text/javascript">
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            checkConnection();
+            document.addEventListener("resume", onResume, false);
+        }
+        function InitPushRecived() {
+            //  alert("yes");
+            var schoolId = getUrlVars()["value"];
+            var schooluserid = getUrlVars()["userId"];
+            var username = getUrlVars()["username"];
+            var pushNotification = window.plugins.pushNotification;
+            pushNotification.onDeviceReady();
+            document.addEventListener('push-notification', function (event) {
+                var title = event.notification;
+                var splitted = title.aps.alert.split("~");
+                //alert("Title: " + title);
+
+                //  alert(splitted[2]);
+                if (splitted[2] == schoolId) {
+                    window.location.href = "Homepage.html?value=" + schoolId + "&userId=" + schooluserid + "&username=" + username + "";
+                }
+                else {
+                    window.location.href = "changeschool.html?type=" + splitted[0] + "&schoolId=" + splitted[2] + "";
+                }
+                pushNotification.stopGeoPushes();
+            });
+        }
+        function onResume() {
+
+            InitPushRecived();
+        }
+        var getconstatus;
+        function checkConnection() {
+            var networkState = navigator.network.connection.type;
+
+            var states = {};
+            states[Connection.UNKNOWN] = 'Unknown connection';
+            states[Connection.ETHERNET] = 'Ethernet connection';
+            states[Connection.WIFI] = 'WiFi connection';
+            states[Connection.CELL_2G] = 'Cell 2G connection';
+            states[Connection.CELL_3G] = 'Cell 3G connection';
+            states[Connection.CELL_4G] = 'Cell 4G connection';
+            states[Connection.NONE] = 'No network connection';
+
+            getconstatus = states[networkState];
+
+            //alert('Connection type: ' + states[networkState]);
+        }
+        function CheckBusinessAvailibility() {
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUser_EmailAndSchoolCode',
+                type: 'POST',
+                data: "{'email': '" + window.localStorage["username"] + "','code':'" + $("#ddlBusinesses").val() + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    if (Kewords.length > 0) {
+                        // alert("You are already member of this Business");
+                        function alertDismissed() {
+
+                        }
+                        navigator.notification.alert(
+                                 'You are already member of this Business',  // message
+                                     alertDismissed,         // callback
+                                      '',            // title
+                                         'Done'                  // buttonName
+                                               );
+                    }
+                    else {
+                         
+                        CheckAutoAccept();
+                    }
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div GetUserActiveChannels_SchoolIdSchoolUserIdWise
+                }
+            });
+        }
+        function CheckAutoAccept() {
+          
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetAutoAcceptBySchoolCode',
+                type: 'POST',
+                data: "{'code': '" + $("#ddlBusinesses").val() + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                  //  alert("aaho");
+                    var Kewords = {};
+                    Kewords = response.d;
+             //       alert(Kewords);
+                    if (Kewords.length > 0) {
+                        $("#hfAutoAccept").val(Kewords[0].AutoAccept);
+                        GetUserDetail();
+                    }
+                   
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div GetUserActiveChannels_SchoolIdSchoolUserIdWise
+                }
+            });
+        }
+        function GetUserDetail() {
+           // alert($("#hfAutoAccept").val());
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUserByEmail',
+                type: 'POST',
+                data: "{'email': '" + window.localStorage["username"] + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    if (Kewords.length > 0) {
+                       // alert("yes");
+                        $.ajax({
+                            url: 'http://mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
+                            type: 'POST',
+                            data: "{'schoolUserId': '" + 0 + "','firstName': '" + Kewords[0].FirstName + "','lastName': '" + Kewords[0].LastName + "','email': '" + Kewords[0].Email + "','password': '" + Kewords[0].Password + "','SchoolCode':'" + $("#ddlBusinesses").val() + "','isActive':'" + $("#hfAutoAccept").val() + "','Address':'" + Kewords[0].Address + "','Phone':'" + Kewords[0].Phone + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                //  alert("Thank you for submiting to join " + $("#ddlBusinesses").find(":selected").text());
+                                function alertDismissed() {
+
+                                }
+                                navigator.notification.alert(
+                                         'Thank you for submiting to join ' + $("#ddlBusinesses").find(":selected").text(),  // message
+                                             alertDismissed,         // callback
+                                              '',            // title
+                                                 'Done'                  // buttonName
+                                                       );
+                                window.open("changeschool.html");
+                               
+                            },
+                            failure: function (errMsg) {
+                                $('#errorMessage').text(errMsg); //errorMessage is id of the div GetUserActiveChannels_SchoolIdSchoolUserIdWise
+                            }
+                        });
+                    }
+                    else {
+                        GetAdminDetail();
+                    }
+
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div GetUserActiveChannels_SchoolIdSchoolUserIdWise
+                }
+            });
+        }
+        function GetAdminDetail() {
+            var Auto = $("#hfAutoAccept").val();
+           // alert(Auto);
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetSchoolByEmail',
+                type: 'POST',
+                data: "{'email': '" + window.localStorage["username"] + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    if (Kewords.length > 0) {
+                       // alert("yes");
+                        $.ajax({
+                            url: 'http://mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
+                            type: 'POST',
+                            data: "{'schoolUserId': '" + 0 + "','firstName': '" + Kewords[0].FirstName + "','lastName': '" + Kewords[0].LastName + "','email': '" + window.localStorage["username"] + "','password': '" + Kewords[0].SchoolPassword + "','SchoolCode':'" + $("#ddlBusinesses").val() + "','isActive':'" + Auto + "','Address':'" + Kewords[0].SchoolAddress + "','Phone':'" + Kewords[0].SchoolPhoneNumber + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                //alert("Thank you for submiting to join " + $("#ddlBusinesses").find(":selected").text());
+                                function alertDismissed() {
+
+                                }
+                                navigator.notification.alert(
+                                         'Thank you for submiting to join ' + $("#ddlBusinesses").find(":selected").text(),  // message
+                                             alertDismissed,         // callback
+                                              '',            // title
+                                                 'Done'                  // buttonName
+                                                       );
+                                window.open("changeschool.html");
+
+                            },
+                            failure: function (errMsg) {
+                                $('#errorMessage').text(errMsg); //errorMessage is id of the div GetUserActiveChannels_SchoolIdSchoolUserIdWise
+                            }
+                        });
+                    }
+                    else {
+                        GetBackUserDetail();
+                    }
+
+                },
+                failure: function (errMsg) {
+                    alert("Fail");
+                }
+            });
+        }
+        function GetBackUserDetail() {
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetBcakOfficeUser_ByEmail',
+                type: 'POST',
+                data: "{'email': '" + window.localStorage["username"] + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    if (Kewords.length > 0) {
+                        // alert("yes");
+                        $.ajax({
+                            url: 'http://mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
+                            type: 'POST',
+                            data: "{'schoolUserId': '" + 0 + "','firstName': '" + Kewords[0].UserFristName + "','lastName': '" + Kewords[0].UserLastName + "','email': '" + window.localStorage["username"] + "','password': '" + Kewords[0].UserPassword + "','SchoolCode':'" + $("#ddlBusinesses").val() + "','isActive':'" + false + "','Address':'" + Kewords[0].Address + "','Phone':'" + Kewords[0].UserPhoneNo + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                //  alert("Thank you for submiting to join " + $("#ddlBusinesses").find(":selected").text());
+                                function alertDismissed() {
+
+                                }
+                                navigator.notification.alert(
+                                         'Thank you for submiting to join ' + $("#ddlBusinesses").find(":selected").text(),  // message
+                                             alertDismissed,         // callback
+                                              '',            // title
+                                                 'Done'                  // buttonName
+                                                       );
+                                window.open("changeschool.html");
+
+                            },
+                            failure: function (errMsg) {
+                                $('#errorMessage').text(errMsg); //errorMessage is id of the div GetUserActiveChannels_SchoolIdSchoolUserIdWise
+                            }
+                        });
+                    }
+                    else {
+                        alert("There Was Some Error Please Try Again");
+                    }
+            
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div GetUserActiveChannels_SchoolIdSchoolUserIdWise
+                }
+            });
+        }
+        function GetAllSchools() {
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetAllSchoolSchoolNameAsc',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    //alert(Kewords);
+                    for (i = 0; i < Kewords.length; i++) {
+                        document.getElementById("ddlBusinesses").innerHTML += "<option value='" + Kewords[i].SchoolCode + "'>" + Kewords[i].SchoolName + "</option>";
+                    }
+
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div
+                }
+            });
+        }
+        function GetAllBusinessTypes() {
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetAllBusinessTypes',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var Kewords = {};
+                    Kewords = response.d;
+                    //alert(Kewords);
+                    for (i = 0; i < Kewords.length; i++) {
+                        document.getElementById("ddlBusinessType").innerHTML += "<option value='" + Kewords[i].BusinessTypeId + "'>" + Kewords[i].BusinessTypeTitle + "</option>"
+                    }
+
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div
+                }
+            });
+        }
+        function GetBusinessBusinessTypewise(BusinessTypeId) {
+            $.ajax({
+                url: 'http://mobile.intouchcommunicator.com/WebService.asmx/GetBusinessesByBusinessTypeId',
+                type: 'POST',
+                data: "{'BusinessTypeId': '" + BusinessTypeId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                   // alert("success");
+                    var Kewords = {};
+                    Kewords = response.d;
+                    document.getElementById("ddlBusinesses").innerHTML = "";
+                    for (i = 0; i < Kewords.length; i++) {
+                        
+                        document.getElementById("ddlBusinesses").innerHTML+= "<option value='" + Kewords[i].SchoolCode + "'>" + Kewords[i].SchoolName + "</option>";
+                    }
+
+                },
+                failure: function (errMsg) {
+                    $('#errorMessage').text(errMsg); //errorMessage is id of the div GetUserActiveChannels_SchoolIdSchoolUserIdWise
+                }
+            });
+        }
+        function clickSubmit() {
+            $('#btnSubmit').prop('disabled', true);
+            CheckBusinessAvailibility();
+        }
+        $(document).ready(function () {
+            $('#ddlBusinessType').change(function () {
+                checkConnection();
+                if (getconstatus == "No network connection") {
+                    alert("No network connection! First connect with your internet.");
+
+                }
+                else {
+                    var BusinessId = $('#ddlBusinessType').val();
+                    if (BusinessId !== "0") {
+                        //alert(BusinessId);
+                        GetBusinessBusinessTypewise(BusinessId);
+                    }
+                   
+                }
+            });
+            // var validator = $("#drawer-home").kendoValidator().data("kendoValidator");
+            $('#btnBack').click(function () {
+
+                window.location = "changeschool.html";
+            });
+            GetAllSchools();
+            GetAllBusinessTypes();
+        });
+      
+    </script>
+</head>
+<body onload="InitPushRecived();">
+
+    <div data-role="view" id="drawer-home" data-layout="drawer-layout" data-title="InTouchCommunicator">
+
+
+        <div class="LoginContainer" id="wraper">
+
+
+            <div class="logo">
+                <img src="Images/logo.png" />
+            </div>
+
+            <table class="Container" border="0" align="center">
+
+                <tr>
+                    <td>
+                        <div id="DropdownListCustome">
+                            <select id="ddlBusinessType">
+                                <option value="" selected="selected">Select</option>
+
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div id="DropdownListCustome">
+                            <select id="ddlBusinesses">
+                                <option value="" selected="selected">Select</option>
+
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td><input type="button" value="Submit" onclick="clickSubmit();" id="btnSubmit" /></td>
+                </tr>
+
+            </table>
+
+            <input type="hidden" id="hfAutoAccept" value="" />
+
+        </div>
+    </div>
+
+    <div data-role="layout" data-id="drawer-layout">
+        <header data-role="header">
+            <div data-role="navbar">
+                <!--<a data-role="button" data-rel="drawer" href="#my-drawer" data-align="left">
+                    <img src="Images/SwipeMenuICO.png" id="MenuICOBtn" />
+                </a>-->
+                <input type="image" src="Images/br_prev.png" id="btnBack" width="40" height="40" data-align="left" style="margin-top:-21px;" />
+                <span data-role="view-title" id="BusinessTitle"></span>
+
+            </div>
+        </header>
+    </div>
+
+
+
+    <script>
+        var app = new kendo.mobile.Application($(document.body), { platform: 'android' });
+    </script>
+</body>
+
+</html>
