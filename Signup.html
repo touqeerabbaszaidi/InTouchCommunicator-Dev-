@@ -149,11 +149,7 @@
                     WindowAlert("Please confirm the password");
                     $("#txtRePassword").focus();
                 }
-                else if ($("#ddlBusinesses").val() == "Select")
-                {
-                    WindowAlert("Please select a business");
-                    $("#ddlBusinesses").focus();
-                }
+                
                 else if ($("#txtPassword").val() != $("#txtRePassword").val())
                 {
                     WindowAlert("Password does not match");
@@ -162,10 +158,10 @@
                 else
                 {
                     $.ajax({
-                    url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUser_EmailAndSchoolCode',
+                        url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/GetSchoolUserByEmail',
                     type: 'POST',
                     contentType: "application/json; charset=utf-8",
-                    data: "{'email': '" + $("#txtEmail").val() + "', 'code':'" + $("#ddlBusinesses").val() + "'}",
+                    data: "{'email': '" + $("#txtEmail").val() + "'}",
                     dataType: "json",
                     success: function (response) {
                         var Kewords = {};
@@ -184,7 +180,7 @@
                                 url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/InsertSchoolUser',
                                
                                 type: 'POST',
-                                data: "{'schoolUserId': '" + Id +"','firstName': '" + $("#txtFirstName").val() + "','lastName': '" + $("#txtLastName").val() + "','email': '" + $("#txtEmail").val() + "','password': '" + $("#txtPassword").val() + "','SchoolCode': '" + $("#ddlBusinesses").val() + "','isActive':'"+ false +"','Address':'" + CompleteAddress + "','Phone':'" + $("#txtPhone").val() + "'}",
+                                data: "{'schoolUserId': '" + Id +"','firstName': '" + $("#txtFirstName").val() + "','lastName': '" + $("#txtLastName").val() + "','email': '" + $("#txtEmail").val() + "','password': '" + $("#txtPassword").val() + "','SchoolCode': '','isActive':'"+ false +"','Address':'" + CompleteAddress + "','Phone':'" + $("#txtPhone").val() + "'}",
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 success: function (response) {
@@ -212,7 +208,7 @@
                 
                 window.location = "index.html";
             });
-            GetAllSchools();
+           // GetAllSchools();
         });
       
     </script>
@@ -317,14 +313,14 @@
                 <tr>
                     <td><input type="password" placeholder="Confirm Password" id="txtRePassword" /></td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td><div id="DropdownListCustome">
     <select id="ddlBusinesses">
         <option value="" selected="selected">Select</option>
        
     </select>
 </div></td>
-                </tr>
+                </tr>-->
                 <tr>
 
                     <td><input type="button" value="Submit" onclick="clickSubmit();" /></td>
