@@ -53,38 +53,38 @@
 
 
         function clickSubmit() {
-           // alert('aaaojeeee aaaojeeee');
+            //alert('aaaojeeee aaaojeeee');
             //alert("button clicked.");
             //alert($('#txtEmail').val());
-          //  checkConnection();
-            //if (getconstatus == "No network connection") {
+           // checkConnection();
+            if (getconstatus == "No network connection") {
 
-            //    function alertDismissed() {
+                function alertDismissed() {
 
-            //    }
-            //    navigator.notification.alert(
-            //             'No network connection! First connect with your internet.',  // message
-            //                 alertDismissed,         // callback
-            //                  ' Connection error',            // title
-            //                     'Ok'                  // buttonName
-            //                           );
-            //}
-            //else {
+                }
+                navigator.notification.alert(
+                         'No network connection! First connect with your internet.',  // message
+                             alertDismissed,         // callback
+                              ' Connection error',            // title
+                                 'Ok'                  // buttonName
+                                       );
+            }
+            else {
                // alert($('txtEmail').val());
                // alert($('txtPassword').val());
-                //if ($('#txtEmail').val() == "" || $('#txtPassword').val() == "" || $('#txtEmail').val() == undefined || $('#txtPassword').val() == undefined) {
-                //    //alert("You must enter a username and password");
-                //    function alertDismissed() {
+                if ($('#txtEmail').val() == "" || $('#txtPassword').val() == "" || $('#txtEmail').val() == undefined || $('#txtPassword').val() == undefined) {
+                    //alert("You must enter a username and password");
+                    function alertDismissed() {
 
-                //    }
-                //    navigator.notification.alert(
-                //             'You must enter a username and password',  // message
-                //                 alertDismissed,         // callback
-                //                  'Empty user detail',            // title
-                //                     'Ok'                  // buttonName
-                //                           );
-                //}
-                //else {
+                    }
+                    navigator.notification.alert(
+                             'You must enter a username and password',  // message
+                                 alertDismissed,         // callback
+                                  'Empty user detail',            // title
+                                     'Ok'                  // buttonName
+                                           );
+                }
+                else {
                     //alert("yes");
                     flag1 = "false";
                     flag2 = "false";
@@ -96,8 +96,8 @@
                     LoginBusinessAdmin();
                     LoginBackOfficeUser();
                 }
-           // }
-      //  }
+            }
+        }
 
         function getUrlVars() {
             var vars = [], hash;
@@ -114,7 +114,26 @@
         $(document).ready(function () {
             //alert("ready");
             $('#dvLoading').fadeOut(10);
-          
+            //$("#dvLoading").fadeOut();
+            var online = navigator.onLine;    // Detecting the internet connection
+            //alert(online);
+            if (online) {
+                // do your stuff
+            } else {
+                //alert('You\'re Offline now...');
+                //return false;
+            }
+            //   $("#submit").click(function () {
+            //     alert("button clicked.");
+            //   //alert($('#txtEmail').val());
+            // handleLogin();
+            // registerPushwoosh($('#txtEmail').val());
+            // UserLogin();
+            // LoginBusinessAdmin();
+            // LoginBackOfficeUser();
+            // });
+
+            //var form = $("#loginForm");
             if (window.localStorage["username"] != 'undefined' && window.localStorage["password"] != 'undefined' && window.localStorage["username"] != '' && window.localStorage["password"] != '' && window.localStorage["username"] != null && window.localStorage["password"] != null) {
                 //  alert("local");
                 $("#dvLoading").fadeIn(400);
@@ -128,11 +147,11 @@
                     LoginBackOfficeUser();
 
                     $('#dvLoading').fadeOut(2000);
-          
+                    
                 }, 3000);
             }
 
-          
+           
             //alert("button Logged2. email: " + $('#txtEmail').val());
             registerPushwoosh($('#txtEmail').val());
             //alert("registerPushwoosh");
@@ -155,7 +174,7 @@
 
 
         function UserLogin() {
-            alert("button clicked.");
+            //alert("button clicked.");
             $.ajax({
                 type: "POST",
                 url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/MobileAppGetSchoolUserByEmailAndPassword',
@@ -167,7 +186,6 @@
                 success: function (response) {
                     if (response.d != null && response.d != "") {
                         var prods = response.d;
-                        alert("success");
                         $("#Something").show();
                         $("#wraper").hide();
                         $.each(prods, function (index, prod) {
