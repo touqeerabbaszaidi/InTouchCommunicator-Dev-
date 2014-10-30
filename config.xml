@@ -38,15 +38,14 @@
 <gap:splash src="splash/ios/Default_iphone5.png" gap:platform="ios" width="640" height="1136" />
 <gap:splash src="splash/ios/Default-Landscape.png" gap:platform="ios" width="1024" height="748" />
 <gap:splash src="splash/ios/Default-Portrait.png" gap:platform="ios" width="768" height="1004" />
-
+<feature name="Notification">
+    <param name="ios-package" value="CDVNotification" />
+</feature>
 <!-- retina iPad support: PhoneGap 2.5.0+ only -->
 <gap:splash src="splash/ios/Default-Landscape_at_2x.png" gap:platform="ios" width="2048" height="1496" />
 <gap:splash src="splash/ios/Default-Portrait_at_2x.png" gap:platform="ios" width="1536" height="2008" />
 
-  <preference name="DisallowOverscroll" value="true" />
-
-  <preference name="Notification" value="CDVNotification" />
-    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" />
+  <preference name="DisallowOverscroll" value="true" />     <gap:plugin name="com.pushwoosh.plugins.pushwoosh" />
    <!--<plugin name="InAppBrowser" value="CDVInAppBrowser" />-->
 
   <access origin="*"/>
