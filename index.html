@@ -56,7 +56,7 @@
            // alert('aaaojeeee aaaojeeee');
             //alert("button clicked.");
             //alert($('#txtEmail').val());
-            checkConnection();
+          //  checkConnection();
             //if (getconstatus == "No network connection") {
 
             //    function alertDismissed() {
@@ -114,26 +114,7 @@
         $(document).ready(function () {
             //alert("ready");
             $('#dvLoading').fadeOut(10);
-            //$("#dvLoading").fadeOut();
-            var online = navigator.onLine;    // Detecting the internet connection
-            //alert(online);
-            if (online) {
-                // do your stuff
-            } else {
-                //alert('You\'re Offline now...');
-                //return false;
-            }
-            //   $("#submit").click(function () {
-            //     alert("button clicked.");
-            //   //alert($('#txtEmail').val());
-            // handleLogin();
-            // registerPushwoosh($('#txtEmail').val());
-            // UserLogin();
-            // LoginBusinessAdmin();
-            // LoginBackOfficeUser();
-            // });
-
-            //var form = $("#loginForm");
+          
             if (window.localStorage["username"] != 'undefined' && window.localStorage["password"] != 'undefined' && window.localStorage["username"] != '' && window.localStorage["password"] != '' && window.localStorage["username"] != null && window.localStorage["password"] != null) {
                 //  alert("local");
                 $("#dvLoading").fadeIn(400);
@@ -147,28 +128,11 @@
                     LoginBackOfficeUser();
 
                     $('#dvLoading').fadeOut(2000);
-                    //var type = getUrlVars()["type"];
-                    //alert("Query String Type: " + type);
-                    //var schoolId = getUrlVars()["schoolId"];
-                    //alert("Query String SchoolId: " + schoolId);
-                    //if (type != '' && type != undefined) {
-                    //  alert("Entered if: " + type);
-                    //if (type == 'News') {
-                    //  window.location.href = "news.html?value=" + schoolId + "&userId=0&username=Admin";
-                    //}
-                    //else if (type == 'Calender') {
-                    //  window.location.href = "calendar.html?value=" + schoolId + "&userId=0&username=Admin";
-                    //}
-                    //else if (type == 'Resource') {
-                    //  window.location.href = "resources.html?value=" + schoolId + "&userId=0&username=Admin";
-                    //}
-                    //}
+          
                 }, 3000);
             }
 
-            $("#signuptag").click(function () {
-                window.open("http://www.intouchcommunicator.com/WebCommunicator/SchoolUserRegisteration.aspx", '_system');
-            });
+          
             //alert("button Logged2. email: " + $('#txtEmail').val());
             registerPushwoosh($('#txtEmail').val());
             //alert("registerPushwoosh");
