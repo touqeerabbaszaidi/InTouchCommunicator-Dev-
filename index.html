@@ -25,7 +25,7 @@
         document.addEventListener("deviceready", onDeviceReady, false);
 
         function onDeviceReady() {
-           
+            document.addEventListener("offline", OflineMessage, false);
             initPushwoosh();
         }
 
@@ -35,7 +35,9 @@
         //function registerPushMethod() {//alert('test method');
         //    registerPushwoosh($('#txtEmail').val());
         //}
-
+        function OflineMessage(){
+            alert("you are Ofline now");
+        }
 
         function clickSubmit() {
             //alert('aaaojeeee aaaojeeee');
