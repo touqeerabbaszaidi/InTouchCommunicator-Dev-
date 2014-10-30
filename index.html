@@ -25,29 +25,13 @@
         document.addEventListener("deviceready", onDeviceReady, false);
 
         function onDeviceReady() {
-            checkConnection();
+           
             initPushwoosh();
         }
 
         var getconstatus;
 
-        function checkConnection() {
-            alert("yes")
-            var networkState = navigator.network.connection.type;
-
-            var states = {};
-            states[Connection.UNKNOWN] = 'Unknown connection';
-            states[Connection.ETHERNET] = 'Ethernet connection';
-            states[Connection.WIFI] = 'WiFi connection';
-            states[Connection.CELL_2G] = 'Cell 2G connection';
-            states[Connection.CELL_3G] = 'Cell 3G connection';
-            states[Connection.CELL_4G] = 'Cell 4G connection';
-            states[Connection.NONE] = 'No network connection';
-
-            getconstatus = states[networkState];
-            alert("yes");
-            //alert('Connection type: ' + states[networkState]);
-        }
+       
         //function registerPushMethod() {//alert('test method');
         //    registerPushwoosh($('#txtEmail').val());
         //}
@@ -75,15 +59,16 @@
                // alert($('txtPassword').val());
                 if ($('#txtEmail').val() == "" || $('#txtPassword').val() == "" || $('#txtEmail').val() == undefined || $('#txtPassword').val() == undefined) {
                     //alert("You must enter a username and password");
-                    function alertDismissed() {
+                    //function alertDismissed() {
 
-                    }
-                    navigator.notification.alert(
-                             'You must enter a username and password',  // message
-                                 alertDismissed,         // callback
-                                  'Empty user detail',            // title
-                                     'Ok'                  // buttonName
-                                           );
+                    //}
+                    //navigator.notification.alert(
+                    //         'You must enter a username and password',  // message
+                    //             alertDismissed,         // callback
+                    //              'Empty user detail',            // title
+                    //                 'Ok'                  // buttonName
+                    //                       );
+                    alert("enter");
                 }
                 else {
                     //alert("yes");
