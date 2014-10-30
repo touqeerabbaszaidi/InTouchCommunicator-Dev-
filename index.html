@@ -53,38 +53,38 @@
 
 
         function clickSubmit() {
-            alert('aaaojeeee aaaojeeee');
+           // alert('aaaojeeee aaaojeeee');
             //alert("button clicked.");
             //alert($('#txtEmail').val());
             checkConnection();
-            if (getconstatus == "No network connection") {
+            //if (getconstatus == "No network connection") {
 
-                function alertDismissed() {
+            //    function alertDismissed() {
 
-                }
-                navigator.notification.alert(
-                         'No network connection! First connect with your internet.',  // message
-                             alertDismissed,         // callback
-                              ' Connection error',            // title
-                                 'Ok'                  // buttonName
-                                       );
-            }
-            else {
+            //    }
+            //    navigator.notification.alert(
+            //             'No network connection! First connect with your internet.',  // message
+            //                 alertDismissed,         // callback
+            //                  ' Connection error',            // title
+            //                     'Ok'                  // buttonName
+            //                           );
+            //}
+            //else {
                // alert($('txtEmail').val());
                // alert($('txtPassword').val());
-                if ($('#txtEmail').val() == "" || $('#txtPassword').val() == "" || $('#txtEmail').val() == undefined || $('#txtPassword').val() == undefined) {
-                    //alert("You must enter a username and password");
-                    function alertDismissed() {
+                //if ($('#txtEmail').val() == "" || $('#txtPassword').val() == "" || $('#txtEmail').val() == undefined || $('#txtPassword').val() == undefined) {
+                //    //alert("You must enter a username and password");
+                //    function alertDismissed() {
 
-                    }
-                    navigator.notification.alert(
-                             'You must enter a username and password',  // message
-                                 alertDismissed,         // callback
-                                  'Empty user detail',            // title
-                                     'Ok'                  // buttonName
-                                           );
-                }
-                else {
+                //    }
+                //    navigator.notification.alert(
+                //             'You must enter a username and password',  // message
+                //                 alertDismissed,         // callback
+                //                  'Empty user detail',            // title
+                //                     'Ok'                  // buttonName
+                //                           );
+                //}
+                //else {
                     //alert("yes");
                     flag1 = "false";
                     flag2 = "false";
@@ -96,8 +96,8 @@
                     LoginBusinessAdmin();
                     LoginBackOfficeUser();
                 }
-            }
-        }
+           // }
+      //  }
 
         function getUrlVars() {
             var vars = [], hash;
