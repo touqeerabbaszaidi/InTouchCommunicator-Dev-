@@ -191,7 +191,7 @@
 
 
         function UserLogin() {
-            //alert("button clicked.");
+            alert("button clicked.");
             $.ajax({
                 type: "POST",
                 url: 'http://dev.mobile.intouchcommunicator.com/WebService.asmx/MobileAppGetSchoolUserByEmailAndPassword',
@@ -203,6 +203,7 @@
                 success: function (response) {
                     if (response.d != null && response.d != "") {
                         var prods = response.d;
+                        alert("success");
                         $("#Something").show();
                         $("#wraper").hide();
                         $.each(prods, function (index, prod) {
